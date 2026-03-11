@@ -2,25 +2,17 @@
 
 WITH CTE_Example AS
 (
-SELECT gender, AVG(salary) AVG_Sal, MAX(salary) MAX_Sal, MIN(salary) Min_sal, COUNT(salary) count_sal
-FROM employee_demographics dem
-JOIN employee_salary sal
-	ON dem.employee_id = sal.employee_id
-GROUP By gender
+SELECT employee_id, gender, birth_date
+FROM employee_demographics 
+WHERE birth_date > '1985-01-01'
+),
+CET_Example2 AS
+(
+SELECT *
+FROM employee_salary
+WHERE salary > 50000
 )
-SELECT AVG(AVG_Sal)
+SELECT *
 FROM CTE_example
 ;
 
-
-
-SELECT AVG(AVG_Sal
-FROM(SELECT gender, AVG(salary) AVG_Sal, MAX(salary) MAX_Sal, MIN(salary) Min_sal, COUNT(salary) count_sal
-FROM employee_demographics dem
-JOIN employee_salary sal
-	ON dem.employee_id = sal.employee_id
-GROUP By gender
-)
-SELECT AVG(AVG_Sal)
-FROM CTE_example
-;
